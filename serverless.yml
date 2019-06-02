@@ -1,0 +1,24 @@
+service: strattonDevAnalytics
+
+frameworkVersion: ">=1.28.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: go1.x
+  stage: dev
+  profile: serverlessUser
+  memorySize: 128
+
+package:
+ exclude:
+   - ./**
+ include:
+   - ./bin/**
+
+functions:
+  analytics:
+    handler: bin/analytics
+    events:
+      - http:
+          path: analytics
+          method: post
